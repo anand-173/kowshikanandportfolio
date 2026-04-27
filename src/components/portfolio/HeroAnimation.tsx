@@ -7,23 +7,23 @@ const ORIGINAL_POV = { lat: 20, lng: 78, altitude: 2.5 }; // Centered on India
 const HeroAnimation = () => {
   const globeEl = useRef<any>();
   const [countries, setCountries] = useState({ features: [] });
-  const [isDesktop, setIsDesktop] = useState(false);
+  const [dimensions, setDimensions] = useState({ width: 600, height: 600 });
   const resetTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    // Check screen size for performance optimization
-    const checkScreenSize = () => {
-      setIsDesktop(window.innerWidth >= 768);
+    const handleResize = () => {
+      const size = window.innerWidth < 768 ? 350 : 600;
+      setDimensions({ width: size, height: size });
     };
     
-    checkScreenSize();
-    window.addEventListener('resize', checkScreenSize);
+    handleResize();
+    window.addEventListener('resize', handleResize);
     
     fetch('https://raw.githubusercontent.com/vasturiano/react-globe.gl/master/example/datasets/ne_110m_admin_0_countries.geojson')
       .then(res => res.json())
       .then(setCountries);
       
-    return () => window.removeEventListener('resize', checkScreenSize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const HeroAnimation = () => {
       controls.autoRotateSpeed = -1.5;
       controls.enableZoom = false;
     }
-  }, [isDesktop]); // Re-run when globe mounts on desktop
+  }, [dimensions]);
 
   // Called when interaction starts — clear any pending reset
   const handleInteractionStart = useCallback(() => {
@@ -61,11 +61,9 @@ const HeroAnimation = () => {
     };
   }, []);
 
-  if (!isDesktop) return null;
-
   return (
     <div
-      className="absolute right-0 top-1/2 -translate-y-1/2 w-[400px] lg:w-[600px] h-[400px] lg:h-[600px] hidden md:flex items-center justify-center z-10 lg:right-10 opacity-90 mix-blend-screen hover:opacity-100 transition-opacity cursor-grab active:cursor-grabbing"
+      className="absolute right-0 md:right-4 lg:right-10 top-1/2 -translate-y-1/2 w-full max-w-[350px] md:max-w-[600px] aspect-square flex items-center justify-center z-0 md:z-10 opacity-60 md:opacity-90 mix-blend-screen hover:opacity-100 transition-opacity cursor-grab active:cursor-grabbing"
       onMouseDown={handleInteractionStart}
       onMouseUp={handleInteractionEnd}
       onMouseLeave={handleInteractionEnd}
@@ -74,8 +72,8 @@ const HeroAnimation = () => {
     >
       <Globe
         ref={globeEl}
-        width={600}
-        height={600}
+        width={dimensions.width}
+        height={dimensions.height}
         backgroundColor="rgba(0,0,0,0)"
         globeImageUrl="//unpkg.com/three-globe/example/img/earth-dark.jpg"
         showAtmosphere={true}
