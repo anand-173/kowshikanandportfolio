@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Mail, MapPin, ArrowRight } from "lucide-react";
+import { Mail, MapPin, ArrowRight, Linkedin } from "lucide-react";
 import Section from "./Section";
 
 const Contact = () => {
@@ -20,6 +20,7 @@ const Contact = () => {
           <div className="flex flex-col gap-4 max-w-md">
             {[
               { icon: Mail, label: "Email Me directly", value: "kowshikanandnomula@gmail.com", href: "mailto:kowshikanandnomula@gmail.com" },
+              { icon: Linkedin, label: "Connect on LinkedIn", value: "kowshik-anand-nomula", href: "https://www.linkedin.com/in/kowshik-anand-nomula-78aa0a403" },
               { icon: MapPin, label: "Location", value: "Hyderabad, India" },
             ].map((it) => (
               <a

@@ -23,7 +23,7 @@ const Footer = () => {
           <a href="https://github.com/anand-173" target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl border border-border bg-surface hover:border-primary/50 transition-colors">
             <Github className="w-5 h-5 text-muted-foreground hover:text-primary transition-colors" />
           </a>
-          <a href="https://linkedin.com/in/kowshikanand" target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl border border-border bg-surface hover:border-primary/50 transition-colors">
+          <a href="https://www.linkedin.com/in/kowshik-anand-nomula-78aa0a403" target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl border border-border bg-surface hover:border-primary/50 transition-colors">
             <Linkedin className="w-5 h-5 text-muted-foreground hover:text-primary transition-colors" />
           </a>
           <a href="mailto:kowshikanand@example.com" className="p-3 rounded-xl border border-border bg-surface hover:border-primary/50 transition-colors">
