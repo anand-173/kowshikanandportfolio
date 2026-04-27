@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowDown, Download, Github, Mail } from "lucide-react";
+import HeroAnimation from "./HeroAnimation";
 
 const Hero = () => {
   return (
@@ -10,6 +11,7 @@ const Hero = () => {
         className="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full blur-3xl opacity-20"
         style={{ background: "var(--gradient-glow)" }}
       />
+      <HeroAnimation />
 
       <div className="container relative z-10 pt-32 pb-20">
         <motion.div

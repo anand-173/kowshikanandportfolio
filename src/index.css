@@ -77,6 +77,11 @@
       radial-gradient(ellipse 80% 50% at 50% -20%, hsl(48 96% 53% / 0.05), transparent),
       radial-gradient(ellipse 60% 50% at 80% 110%, hsl(48 96% 40% / 0.03), transparent);
     background-attachment: fixed;
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path d='M3 3l7 16 2.5-7.5L20 9L3 3z' fill='%23FACC15' stroke='%23000000' stroke-width='1.5' stroke-linejoin='round'/></svg>"), auto;
+  }
+  
+  a, button, [role="button"], label {
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><circle cx='16' cy='16' r='10' fill='none' stroke='%23FACC15' stroke-width='2'/><circle cx='16' cy='16' r='3' fill='%23FACC15'/><path d='M16 2v4M16 26v4M2 16h4M26 16h4' stroke='%23FACC15' stroke-width='2'/></svg>") 16 16, pointer !important;
   }
   h1, h2, h3, h4 {
     font-family: 'Space Grotesk', 'Inter', sans-serif;
