@@ -27,7 +27,7 @@ const jobs = [
   {
     role: "Full-Stack Developer Intern",
     company: "Kansbe",
-    period: "Feb 2025 – Aug 2025",
+    period: "Nov 2024 – May 2025",
     location: "Hyderabad",
     points: [
       "Delivered 12+ reusable Angular 16 components on an ASP.NET Core + MySQL backend, accelerating HRMS feature delivery by 30%.",
