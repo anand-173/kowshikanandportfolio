@@ -7,12 +7,23 @@ const ORIGINAL_POV = { lat: 20, lng: 78, altitude: 2.5 }; // Centered on India
 const HeroAnimation = () => {
   const globeEl = useRef<any>();
   const [countries, setCountries] = useState({ features: [] });
+  const [isDesktop, setIsDesktop] = useState(false);
   const resetTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
+    // Check screen size for performance optimization
+    const checkScreenSize = () => {
+      setIsDesktop(window.innerWidth >= 768);
+    };
+    
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    
     fetch('https://raw.githubusercontent.com/vasturiano/react-globe.gl/master/example/datasets/ne_110m_admin_0_countries.geojson')
       .then(res => res.json())
       .then(setCountries);
+      
+    return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
 
   useEffect(() => {
@@ -22,7 +33,7 @@ const HeroAnimation = () => {
       controls.autoRotateSpeed = -1.5;
       controls.enableZoom = false;
     }
-  }, []);
+  }, [isDesktop]); // Re-run when globe mounts on desktop
 
   // Called when interaction starts — clear any pending reset
   const handleInteractionStart = useCallback(() => {
@@ -49,6 +60,8 @@ const HeroAnimation = () => {
       if (resetTimerRef.current) clearTimeout(resetTimerRef.current);
     };
   }, []);
+
+  if (!isDesktop) return null;
 
   return (
     <div

@@ -76,7 +76,9 @@
     background-image:
       radial-gradient(ellipse 80% 50% at 50% -20%, hsl(48 96% 53% / 0.05), transparent),
       radial-gradient(ellipse 60% 50% at 80% 110%, hsl(48 96% 40% / 0.03), transparent);
-    background-attachment: fixed;
+    @media (min-width: 1024px) {
+      background-attachment: fixed;
+    }
     cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path d='M3 3l7 16 2.5-7.5L20 9L3 3z' fill='%23FACC15' stroke='%23000000' stroke-width='1.5' stroke-linejoin='round'/></svg>"), auto;
   }
   
@@ -109,6 +111,7 @@
     background: hsl(var(--surface));
     border: 1px solid hsl(var(--border));
     transition: all 0.4s var(--transition-smooth);
+    will-change: transform, border-color;
   }
   .card-surface:hover {
     border-color: hsl(var(--primary) / 0.4);

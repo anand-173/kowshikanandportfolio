@@ -8,7 +8,7 @@ const Hero = () => {
       <div className="absolute inset-0 grid-bg opacity-60" />
       <div className="absolute inset-0 noise" />
       <div
-        className="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full blur-3xl opacity-20 pointer-events-none"
+        className="absolute -top-20 md:-top-40 left-1/2 -translate-x-1/2 w-[300px] md:w-[800px] h-[300px] md:h-[800px] rounded-full blur-2xl md:blur-3xl opacity-10 md:opacity-20 pointer-events-none"
         style={{ background: "var(--gradient-glow)" }}
       />
       <HeroAnimation />
