@@ -1,75 +1,59 @@
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from 'react';
+import Globe from 'react-globe.gl';
 
 const HeroAnimation = () => {
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  // Smooth the mouse values
-  const smoothX = useSpring(mouseX, { damping: 50, stiffness: 400 });
-  const smoothY = useSpring(mouseY, { damping: 50, stiffness: 400 });
-
-  // Transform raw mouse position to rotation and movement
-  const rotateX = useTransform(smoothY, [-1, 1], [15, -15]);
-  const rotateY = useTransform(smoothX, [-1, 1], [-15, 15]);
-  
-  const moveX1 = useTransform(smoothX, [-1, 1], [-30, 30]);
-  const moveY1 = useTransform(smoothY, [-1, 1], [-30, 30]);
-  
-  const moveX2 = useTransform(smoothX, [-1, 1], [40, -40]);
-  const moveY2 = useTransform(smoothY, [-1, 1], [40, -40]);
+  const globeEl = useRef<any>();
+  const [countries, setCountries] = useState({ features: [] });
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      // Normalize mouse coordinates from -1 to 1 based on screen size
-      const x = (e.clientX / window.innerWidth) * 2 - 1;
-      const y = (e.clientY / window.innerHeight) * 2 - 1;
-      mouseX.set(x);
-      mouseY.set(y);
-    };
+    // Fetch GeoJSON for the continents network wireframes
+    fetch('https://raw.githubusercontent.com/vasturiano/react-globe.gl/master/example/datasets/ne_110m_admin_0_countries.geojson')
+      .then(res => res.json())
+      .then(setCountries);
+  }, []);
 
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [mouseX, mouseY]);
+  useEffect(() => {
+    if (globeEl.current) {
+      // Built-in OrbitControls from react-globe.gl handles the drag interactions perfectly
+      const controls = globeEl.current.controls();
+      controls.autoRotate = true;
+      controls.autoRotateSpeed = -1.5; // Negative value for clockwise rotation
+      controls.enableZoom = false; // Prevent scrolling from zooming the globe to avoid breaking the page scroll
+    }
+  }, []);
 
   return (
-    <div className="absolute right-0 lg:right-20 xl:right-40 top-1/2 -translate-y-1/2 w-[400px] lg:w-[500px] h-[400px] lg:h-[500px] hidden md:block pointer-events-none z-0" style={{ perspective: "1000px" }}>
-      <motion.div 
-        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-        className="w-full h-full relative"
-      >
-        {/* Main Obsidian Core */}
-        <motion.div
-          style={{ x: moveX1, y: moveY1 }}
-          className="absolute inset-10 lg:inset-20 bg-surface border border-primary/30 rounded-3xl shadow-[0_0_60px_hsl(var(--primary)/0.15)] flex items-center justify-center overflow-hidden"
-        >
-          {/* Subtle inner grid for texture */}
-          <div className="absolute inset-0 opacity-20 bg-[linear-gradient(to_right,#ffffff12_1px,transparent_1px),linear-gradient(to_bottom,#ffffff12_1px,transparent_1px)] bg-[size:24px_24px]" />
-          
-          {/* Inner floating emblem */}
-          <div className="w-32 h-32 border border-primary/20 rounded-full flex items-center justify-center">
-            <div className="w-16 h-16 border border-primary/40 rounded-full animate-[spin_10s_linear_infinite]" />
-          </div>
-        </motion.div>
+    <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[400px] lg:w-[600px] h-[400px] lg:h-[600px] hidden md:flex items-center justify-center z-10 lg:right-10 opacity-90 cursor-grab active:cursor-grabbing mix-blend-screen hover:opacity-100 transition-opacity">
+      <Globe
+        ref={globeEl}
+        width={600}
+        height={600}
+        backgroundColor="rgba(0,0,0,0)" // Transparent background so it floats
+        globeImageUrl="//unpkg.com/three-globe/example/img/earth-dark.jpg" // Dark matte earth core
+        showAtmosphere={true}
+        atmosphereColor="#FACC15" // Gold halo
+        atmosphereAltitude={0.15}
+        
+        // Continent Wireframe Network
+        polygonsData={countries.features}
+        polygonCapColor={() => 'rgba(250, 204, 21, 0.05)'} // Very faint gold fill
+        polygonSideColor={() => 'rgba(250, 204, 21, 0.02)'}
+        polygonStrokeColor={() => '#FACC15'} // Solid gold wireframe lines drawing the continents
+        polygonAltitude={0.01}
 
-        {/* Orbiting Shard 1 */}
-        <motion.div
-          style={{ x: moveX2, y: moveY2, z: 50 }}
-          className="absolute top-10 right-0 lg:right-10 w-32 h-40 bg-surface/80 backdrop-blur-md border border-primary/40 rounded-2xl shadow-[0_0_30px_hsl(var(--primary)/0.2)]"
-        />
-
-        {/* Orbiting Shard 2 */}
-        <motion.div
-          style={{ x: moveX1, y: moveY2, z: 80 }}
-          className="absolute bottom-20 left-0 lg:left-10 w-40 h-24 bg-surface/90 border border-primary/30 rounded-2xl shadow-[0_0_40px_hsl(var(--primary)/0.1)]"
-        />
-
-        {/* Ambient Glow */}
-        <motion.div
-          style={{ x: moveX2, y: moveY1 }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-primary/10 rounded-full blur-[80px]"
-        />
-      </motion.div>
+        // Data Arcs (The "Web" network effect)
+        arcsData={[
+          { startLat: 17.3850, startLng: 78.4867, endLat: 37.7749, endLng: -122.4194 },
+          { startLat: 17.3850, startLng: 78.4867, endLat: 51.5074, endLng: -0.1278 },
+          { startLat: 17.3850, startLng: 78.4867, endLat: -33.8688, endLng: 151.2093 },
+          { startLat: 17.3850, startLng: 78.4867, endLat: 35.6762, endLng: 139.6503 },
+        ]}
+        arcColor={() => '#FACC15'}
+        arcDashLength={0.4}
+        arcDashGap={0.2}
+        arcDashAnimateTime={2000}
+        arcAltitudeAutoScale={0.3}
+      />
     </div>
   );
 };

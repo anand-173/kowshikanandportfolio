@@ -8,17 +8,17 @@ const Hero = () => {
       <div className="absolute inset-0 grid-bg opacity-60" />
       <div className="absolute inset-0 noise" />
       <div
-        className="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full blur-3xl opacity-20"
+        className="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full blur-3xl opacity-20 pointer-events-none"
         style={{ background: "var(--gradient-glow)" }}
       />
       <HeroAnimation />
 
-      <div className="container relative z-10 pt-32 pb-20">
+      <div className="container relative z-10 pt-32 pb-20 pointer-events-none">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-primary/30 bg-surface/50 text-xs font-semibold tracking-widest text-primary mb-8"
+          className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-primary/30 bg-surface/50 text-xs font-semibold tracking-widest text-primary mb-8 pointer-events-auto"
         >
           <span className="w-2 h-2 rounded-full bg-primary animate-pulse shadow-[0_0_8px_hsl(var(--primary))]" />
           ON PATROL · OPEN TO MISSIONS
@@ -28,7 +28,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.05] tracking-tight"
+          className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.05] tracking-tight pointer-events-auto"
         >
           <span className="text-gradient">Nomula</span>
           <br />
@@ -39,7 +39,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.25 }}
-          className="mt-8 max-w-2xl text-lg md:text-xl text-muted-foreground leading-relaxed"
+          className="mt-8 max-w-2xl text-lg md:text-xl text-muted-foreground leading-relaxed pointer-events-auto"
         >
           QA Automation Engineer & Full-Stack Developer crafting resilient test frameworks,
           performant web apps, and applied ML systems. Currently building at{" "}
@@ -50,7 +50,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.32 }}
-          className="mt-8 max-w-2xl"
+          className="mt-8 max-w-2xl pointer-events-auto"
         >
           <div className="relative inline-block">
             <div className="absolute -left-4 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-primary to-transparent" />
@@ -64,7 +64,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.4 }}
-          className="mt-10 flex flex-wrap items-center gap-4"
+          className="mt-10 flex flex-wrap items-center gap-4 pointer-events-auto"
         >
           <a
             href="/Kowshik_Anand_Nomula_Resume.pdf"
@@ -87,7 +87,7 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.8 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground text-xs"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground text-xs pointer-events-auto"
         >
           <span>scroll</span>
           <ArrowDown className="w-4 h-4 animate-bounce" />

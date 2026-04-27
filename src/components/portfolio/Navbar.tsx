@@ -24,10 +24,10 @@ const Navbar = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-        scrolled ? "backdrop-blur-xl bg-background/70 border-b border-border" : ""
+        scrolled ? "backdrop-blur-xl bg-background/70 border-b border-border pointer-events-auto" : "pointer-events-none"
       }`}
     >
-      <nav className="container flex items-center justify-between py-4">
+      <nav className="container flex items-center justify-between py-4 pointer-events-auto">
         <a href="#home" className="font-display text-lg font-bold tracking-tight">
           <span className="text-glow">Kowshik Anand</span>
         </a>
