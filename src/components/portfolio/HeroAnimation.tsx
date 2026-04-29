@@ -5,6 +5,7 @@ const RESET_DELAY_MS = 2000; // 2 seconds of inactivity before reset
 const ORIGINAL_POV = { lat: 20, lng: 78, altitude: 2.5 }; // Centered on India
 
 const HeroAnimation = () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const globeEl = useRef<any>();
   const [countries, setCountries] = useState({ features: [] });
   const [dimensions, setDimensions] = useState({ width: 600, height: 600 });

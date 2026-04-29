@@ -65,9 +65,9 @@ const Skills = () => (
     >
       <div className="card-surface rounded-2xl p-6">
         <div className="text-xs uppercase tracking-[0.2em] text-primary mb-3">Education</div>
-        <h4 className="text-lg font-semibold">B.Tech — Computer Science (AI & ML)</h4>
+        <h4 className="text-lg font-semibold">B.Tech — Computer Science (AI &amp; ML)</h4>
         <p className="text-muted-foreground text-sm mt-1">
-          CMR Engineering College, Hyderabad · CGPA 7.58 / 10 · 2021 – 2025
+          CMR Engineering College, Hyderabad · 2021 – 2025
         </p>
       </div>
       <div className="card-surface rounded-2xl p-6">
