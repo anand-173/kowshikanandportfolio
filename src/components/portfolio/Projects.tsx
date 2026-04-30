@@ -8,7 +8,7 @@ const projects = [
     tags: ["Python", "LSTM", "NLP", "Scikit-learn", "NSE Data"],
     description:
       "Hybrid deep learning pipeline combining LSTM time-series modeling, RSI/Bollinger Band indicators, and NLP sentiment analysis on NSE equity data. Achieved R² of 0.96, outperforming baseline ARIMA by 23% directional accuracy. Implemented GFS multi-level filtering for stock selection.",
-    link: "https://github.com/anand-173",
+    link: "https://github.com/anand-173/Stock-market-future-forecasting",
     metric: "R² 0.96",
   },
   {
@@ -16,7 +16,7 @@ const projects = [
     tags: ["HTML", "CSS", "JavaScript", "REST APIs"],
     description:
       "Responsive health platform featuring an interactive symptom checker and nutrition calculator with real-time third-party nutrition API integration. Built with WCAG-compliant UI/UX for broad accessibility.",
-    link: "https://github.com/anand-173",
+    link: "https://github.com/anand-173/HealthElite",
     metric: "WCAG AA",
   },
 ];
